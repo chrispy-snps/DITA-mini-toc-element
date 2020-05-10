@@ -53,11 +53,11 @@ For an easy way to create your own DITA grammars, see:
 
 The plugin operates in two stages during preprocessing:
 
-1. During `maplink`, the plugin creates an extra copy of all child links in a `<linkpool @role="mini-toc">` list (even if the `args.rellinks` parameter is set to `none`).
+1. During `maplink`, the plugin creates an extra copy of all child links.
 
-2. During `topicpull`, <mini-toc> elements are located and an unordered list of child links is appended as the last child, then the special `<linkpool>` list is deleted.
+2. During `topicpull`, mini-TOC elements in the DITA content have an unordered list of child links appended. In addition, the special `<linkpool>` list from step 1 is deleted.
 
-Here is the `html5` output:
+Here is the `html5` output from the previous example:
 
 ```
 <h1 class="title topictitle1" id="ariaid-title1">My Topic</h1>
@@ -83,7 +83,7 @@ To run the example, install the DITA-OT plugin, then run the following commands:
 
 ## Implementation Notes
 
-The child links are obtained using the existing `<nav>` (child/parent/sibling navigation) link collection code.
+During `maplink`, the child links are obtained using the existing `<nav>` (child/parent/sibling navigation) link collection code. The `maplink-minitoc.xsl` file creates an extra copy of all child links in a `<linkpool @role="mini-toc">` list (even if the `args.rellinks` parameter is set to `none`). And fortunately, the `org.dita.dost.module.MoveLinksModule` Java class is kind enough to copy our list into the topics along with its own content!
 
 ## Limitations
 
