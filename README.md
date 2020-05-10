@@ -89,6 +89,6 @@ During `maplink`, the child links are obtained using the existing `<nav>` (child
 
 Note the following limitations of the plugin:
 
-* The child links do reflect any DITAVAL filtering conditions applied to the child topics, but they *do not* reflect any DITAVAL flagging or highlighting properties applied to the child topics.
-* Because navigation collection ignores the `toc="no"` attribute of topic references, so does this plugin.
+* The mini-TOC child `<xref>` elements do appear/disappear to reflect any DITAVAL filtering conditions applied to the child topics, but they *do not* show any DITAVAL flagging or highlighting properties applied to the child topics. This is purely cosmetic.
+* Because navigation collection ignores the `@toc="no"` attribute of topic references, so does this plugin.
 
