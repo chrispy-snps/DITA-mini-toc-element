@@ -9,12 +9,12 @@ This plugin allows you to place a mini-toc anywhere in your content, with option
 Install the following provided plugin in your DITA-OT:
 
 ```
-plugins/com.synopsys.mini-toc
+com.synopsys.mini-toc
 ```
 
 ## Usage
 
-To insert a mini-TOC in your content, add a &lt;sub-toc&gt; element and optionally insert introductory content:
+To insert a mini-TOC in your content, add a `&lt;div outputclass="mini-toc"&gt;` element and optionally include introductory content:
 
 ```
 <topic>
