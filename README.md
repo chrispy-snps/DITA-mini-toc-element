@@ -9,12 +9,12 @@ This plugin allows you to place a mini-toc anywhere in your content, with option
 Install the following provided plugin in your DITA-OT:
 
 ```
-com.synopsys.mini-toc
+com.synopsys.mini-toc/
 ```
 
 ## Usage
 
-To insert a mini-TOC in your content, add a `&lt;div outputclass="mini-toc"&gt;` element and optionally include introductory content:
+To insert a mini-TOC in your content, add a `<div outputclass="mini-toc">` element and optionally include introductory content:
 
 ```
 <topic>
@@ -37,12 +37,12 @@ To insert a mini-TOC in your content, add a `&lt;div outputclass="mini-toc"&gt;`
 </topic>
 ```
 
-The plugin also looks for a `&lt;sub-toc&gt;` element, which you can specialize from `div` in your own grammar plugin:
+The plugin also looks for a `<mini-toc>` element, which you can specialize from `div` in your own grammar plugin:
 
 ```
-    <sub-toc>
+    <mini-toc>
       <p>The following topics provide information about the XYZ feature:</p>
-    </sub-toc>
+    </mini-toc>
 ```
 
 For an easy way to create your own DITA grammars, see:
@@ -53,9 +53,9 @@ For an easy way to create your own DITA grammars, see:
 
 The plugin operates in two stages during preprocessing:
 
-1. During `maplink`, the plugin creates an extra copy of all child links in a `&lt;linkpool @role="mini-toc"&gt;` element, which is run regardless of the value of the `` parameter.
+1. During `maplink`, the plugin creates an extra copy of all child links in a `<linkpool @role="mini-toc">` list (even if the `args.rellinks` parameter is set to `none`).
 
-2. During `topicpull`, &lt;mini-toc&gt; elements are located and an unordered list of child links is appended as the last child, then the special `&lt;linkpool&gt;` list is deleted.
+2. During `topicpull`, <mini-toc> elements are located and an unordered list of child links is appended as the last child, then the special `<linkpool>` list is deleted.
 
 Here is the `html5` output:
 
@@ -83,7 +83,7 @@ To run the example, install the DITA-OT plugin, then run the following commands:
 
 ## Implementation Notes
 
-The child links are obtained using the existing `&lt;nav&gt;` (child/parent/sibling navigation) link collection code.
+The child links are obtained using the existing `<nav>` (child/parent/sibling navigation) link collection code.
 
 ## Limitations
 
