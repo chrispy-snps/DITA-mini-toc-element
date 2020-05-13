@@ -49,6 +49,27 @@ For an easy way to create your own DITA grammars, see:
 
 [chrispy-snps / DITA-plugin-utilities on Github](https://github.com/chrispy-snps/DITA-plugin-utilities)
 
+In Oxygen XML Author, we use the following CSS to add placeholder items for author comfort:
+
+```
+@media oxygen {
+  *[class~='snps-d/mini-toc'] {
+    border-style: dotted;
+    border-color: blue;
+    border-width: thin;
+  }
+
+  *[class~='snps-d/mini-toc']:after {
+    display: block;
+    content: oxy_label(text, "\2022", styles, "font-size:1.5em;") oxy_label(text, "   (child topics will", styles, "color:blue;display:inline-block;")
+        '\a' oxy_label(text, "\2022", styles, "font-size:1.5em;") oxy_label(text, "   be added here)", styles, "color:blue;display:inline-block;");
+    list-style-type: disc;
+    list-style-position: outside;
+    margin-top: -6pt;
+  }
+}
+```
+
 ## Operation
 
 The plugin operates in two stages during preprocessing:
