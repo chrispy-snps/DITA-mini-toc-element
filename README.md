@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This plugin allows you to place a mini-toc anywhere in your content, with optional introductory text. The mini-TOC is inserted during the preprocessing stage, so it works for all output formats (including normalized DITA).
+This plugin allows you to place a mini-TOC anywhere in your content, with optional introductory text. The mini-TOC is inserted during the preprocessing stage, so it works for all output formats (including normalized DITA).
 
 ## Getting Started
 
@@ -26,18 +26,18 @@ To insert a mini-TOC in your content, add a `<div outputclass="mini-toc">` eleme
   </body>
 
   <topic>
-    <title>XYZ Feature Writeup 1</title>
+    <title>XYZ Feature Writeup #1</title>
     ...
   </topic>
 
   <topic>
-    <title>XYZ Feature Writeup 2</title>
+    <title>XYZ Feature Writeup #2</title>
     ...
   </topic>
 </topic>
 ```
 
-The plugin also looks for a `<mini-toc>` element, which you can specialize from `div` in your own grammar plugin:
+The plugin also looks for a `<mini-toc>` element, specialized from `div`, which you can provide in your own DITA grammar then use as follows:
 
 ```
     <mini-toc>
@@ -49,7 +49,7 @@ For an easy way to create your own DITA grammars, see:
 
 [chrispy-snps / DITA-plugin-utilities on Github](https://github.com/chrispy-snps/DITA-plugin-utilities)
 
-In Oxygen XML Author, we use the following CSS to add placeholder items for author comfort:
+In Oxygen XML Author, we use the following CSS to add placeholder items in the editor for author comfort:
 
 ```
 @media oxygen {
@@ -70,13 +70,21 @@ In Oxygen XML Author, we use the following CSS to add placeholder items for auth
 }
 ```
 
+For PDF Chemistry, we also apply the following CSS pagination property to keep the mini-TOC list with its preceding introduction:
+
+```
+@media print {
+  ul.mini-toc-list { page-break-before: avoid; }
+}
+```
+
 ## Operation
 
-The plugin operates in two stages during preprocessing:
+The plugin uses `preprocess` extension points, and thus it works with all output formats. It operates in two stages:
 
-1. During `maplink`, the plugin creates an extra copy of all child links.
+1. During `maplink`, the plugin creates an extra copy of all child links in a special `<linklist role="mini-toc">`..
 
-2. During `topicpull`, mini-TOC elements in the DITA content have an unordered list of child links appended. In addition, the special `<linkpool>` list from step 1 is deleted.
+2. During `topicpull`, mini-TOC elements in the DITA content have a list of child links appended. In addition, the special `<linklist>` list from step 1 is deleted from `<related-links>`.
 
 Here is the `html5` output from the previous example:
 
@@ -85,7 +93,7 @@ Here is the `html5` output from the previous example:
 <div class="body">
   <div class="div mini-toc">
     <p class="p">The following topics provide information about the XYZ feature:</p>
-    <ul class="ul">
+    <ul class="ul mini-toc-list">
       <li class="li"><a class="xref" href="topic.html#sub1">XYZ Feature #1</a></li>
       <li class="li"><a class="xref" href="topic.html#sub2">XYZ Feature #2</a></li>
     </ul>
@@ -104,7 +112,7 @@ To run the example, install the DITA-OT plugin, then run the following commands:
 
 ## Implementation Notes
 
-During `maplink`, the child links are obtained using the existing `<nav>` (child/parent/sibling navigation) link collection code. The `maplink-minitoc.xsl` file creates an extra copy of all child links in a `<linkpool @role="mini-toc">` list (even if the `args.rellinks` parameter is set to `none`). And fortunately, the `org.dita.dost.module.MoveLinksModule` Java class is kind enough to copy our list into the topics along with its own content!
+During `maplink`, the child links are obtained during the existing `<nav>` (child/parent/sibling navigation) link collection code. The `maplink-minitoc.xsl` file creates an extra copy of all child links in a `<linklist @role="mini-toc">` list (even if the `args.rellinks` parameter is set to `none`). And fortunately, the `org.dita.dost.module.MoveLinksModule` Java class is kind enough to copy our list into the topics along with its own content!
 
 ## Limitations
 

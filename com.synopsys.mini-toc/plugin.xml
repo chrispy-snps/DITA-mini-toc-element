@@ -2,12 +2,15 @@
 <?xml-model href="dita-ot/plugin.rnc" type="application/relax-ng-compact-syntax"?>
 <plugin id="com.synopsys.mini-toc">
 
-  <!-- this saves children links during maplink in special <linklist role="mini-toc"> lists,
-       regardless of the value of args.rellinks -->
-  
+  <!--
+    -| this saves children links during maplink in special <linklist role="mini-toc"> lists,
+    -| regardless of the value of args.rellinks
+    -->
   <feature extension="dita.xsl.maplink" value="maplink-minitoc.xsl" type="file"/>
 
-  <!-- this populates the mini-toc elements, then removes the special <linklist> elements -->
+  <!--
+    -| this populates the mini-toc elements, then removes the special <linklist> elements
+    -->
   <feature extension="dita.xsl.topicpull" value="topicpull-minitoc.xsl" type="file"/>
 
 </plugin>
