@@ -40,7 +40,8 @@
   <xsl:template match="*" mode="minitoc-recursive" priority="-10">
     <xsl:apply-templates select="self::*[@href and not(@href = '')]
                                         [not(@linking = ('none', 'sourceonly'))]
-                                        [not(@processing-role = 'resource-only')]"
+                                        [not(@processing-role = 'resource-only')]
+                                        [not(@toc = 'no')]"
                          mode="link">
       <xsl:with-param name="role">mini-toc</xsl:with-param>
     </xsl:apply-templates>
