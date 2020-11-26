@@ -20,7 +20,7 @@
 
       <!-- create the list of links (we reuse the topicpull processing to get the link text) -->
       <xsl:variable name="links" as="element()*">
-        <xsl:apply-templates select="ancestor::topic[1]/related-links/linklist[@role = 'mini-toc']/link"/>
+         <xsl:apply-templates select="ancestor::*[contains(@class, 'topic/topic')][1]/related-links/linklist[@role = 'mini-toc']/link"/>
       </xsl:variable>
       <xsl:if test="count($links) > 0">
         <ul class="- topic/ul " outputclass="mini-toc-list">
