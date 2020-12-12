@@ -26,6 +26,7 @@
         <ul class="- topic/ul " outputclass="mini-toc-list">
           <xsl:for-each select="$links">
             <li class="- topic/li ">
+              <xsl:copy select="@audience,@platform,@product"/>
               <xref class="- topic/xref ">
                 <xsl:apply-templates select="@href | @type"/>
                 <xsl:value-of select="./linktext"/>  <!-- this should always resolve for valid links -->
