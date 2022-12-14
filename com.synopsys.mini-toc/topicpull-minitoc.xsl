@@ -23,9 +23,9 @@
          <xsl:apply-templates select="ancestor::*[contains(@class, 'topic/topic')][1]/related-links/linklist[@role = 'mini-toc']/link"/>
       </xsl:variable>
       <xsl:if test="count($links) > 0">
-        <ul class="- topic/ul " outputclass="mini-toc-list">
+      	<ul class="- topic/ul " outputclass="mini-toc-list list-group">
           <xsl:for-each select="$links">
-            <li class="- topic/li ">
+          	<li class="- topic/li list-group-item">
               <xref class="- topic/xref ">
                 <xsl:apply-templates select="@href | @type"/>
                 <xsl:value-of select="./linktext"/>  <!-- this should always resolve for valid links -->
