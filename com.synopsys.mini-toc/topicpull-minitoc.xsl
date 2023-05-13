@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet exclude-result-prefixes="xs" version="2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet exclude-result-prefixes="xs" version="3.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:param name="MINI-TOC" select="'yes'"/>
 
   <!--
     -| delete <linklist role="mini-toc">
@@ -14,7 +16,7 @@
   <!--
     -| add <xref> list to end of any mini-toc containers
     -->
-  <xsl:template match="*[contains(@class, '/mini-toc ') or tokenize(@outputclass, '\s+') = 'mini-toc']">
+  <xsl:template match="*[contains(@class, '/mini-toc ') or tokenize(@outputclass, '\s+') = 'mini-toc'][$MINI-TOC eq 'yes']">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()"/>
 
